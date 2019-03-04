@@ -20,3 +20,4 @@ VOLUME /config.php
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["php-fpm"]
