@@ -1,6 +1,6 @@
 FROM php:7.3-fpm-alpine
 
-ARG PDNSMANAGER_VERSION="${PDNSMANAGER_VERSION:-master}"
+ENV PDNSMANAGER_VERSION="${PDNSMANAGER_VERSION:-master}"
 
 RUN docker-php-source extract \
 	&& apk add --no-cache --virtual .build-dependencies \
@@ -13,13 +13,10 @@ RUN docker-php-source extract \
 
 RUN docker-php-ext-install -j"$(getconf _NPROCESSORS_ONLN)" pdo_mysql
 
-RUN apk add --no-cache --virtual .build-dependencies \
-		git \
-	&& git clone --depth 1 --branch ${PDNSMANAGER_VERSION} \
-		https://github.com/loewexy/pdnsmanager.git /pdnsmanager \
-	&& rm -rf /pdnsmanager/.git \
-	&& apk del .build-dependencies \
+RUN apk add --no-cache git \
 	&& rm -rf /tmp/* /var/cache/apk/*
 
-VOLUME /pdnsmanager/backend/config/ConfigUser.php
+VOLUME /config.php
 
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
