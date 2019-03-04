@@ -1,11 +1,12 @@
 #!/bin/sh
 set -e
 
-if [[ ! -d "/pdnsmanager" ]] ; then
+cd /pdnsmanager 
+
+if [[ ! -d "/pdnsmanager/.git" ]] ; then
 	git clone --depth 1 --branch ${PDNSMANAGER_VERSION} \
-		https://github.com/loewexy/pdnsmanager.git /pdnsmanager
+		https://github.com/loewexy/pdnsmanager.git .
 else
-	cd /pdnsmanager 
 
 	if [[ "$(git rev-parse --abbrev-ref HEAD)" != "${PDNSMANAGER_VERSION}" || "${PDNSMANAGER_VERSION}" == "master" ]] ; then
 		git reset --hard HEAD
@@ -13,10 +14,6 @@ else
 		git fetch --depth 1 origin
 		git checkout ${PDNSMANAGER_VERSION}
 	fi
-fi
-
-if [[ -f "/config.php" ]] ; then
-	ln -sf /config.php /pdnsmanager/backend/config/ConfigUser.php
 fi
 
 exec "$@"

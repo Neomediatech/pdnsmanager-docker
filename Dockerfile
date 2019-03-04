@@ -16,7 +16,7 @@ RUN docker-php-ext-install -j"$(getconf _NPROCESSORS_ONLN)" pdo_mysql
 RUN apk add --no-cache git \
 	&& rm -rf /tmp/* /var/cache/apk/*
 
-VOLUME /config.php
+VOLUME /pdnsmanager
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
