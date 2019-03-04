@@ -2,7 +2,7 @@
 
 **Warning** NOT YET TESTED - WORK IN PROGRESS
 
-This container runs a php-fpm process, serving a (pdnsmanager)[https://pdnsmanager.org/quickstart/] installation.
+This container runs a php-fpm process, serving a [pdnsmanager](https://pdnsmanager.org/quickstart/) installation.
 
 It's based on php:7.3-fpm-alpine and contains all necessary PHP extensions to run the pdnsmanager frontend properly. Image size is only around 90MB.
 
