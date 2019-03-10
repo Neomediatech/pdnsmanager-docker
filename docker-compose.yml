@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+    pdnsmanager_php:
+        build: .
+        volumes:
+          - ./ConfigUser.php:/etc/pdnsmanager/ConfigUser.php
+        ports:
+          - 7777:80
