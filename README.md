@@ -2,7 +2,7 @@
 
 This container runs php-fpm and nginx via supervisor, serving a [pdnsmanager](https://pdnsmanager.org/quickstart/) installation.
 
-It's based on php:7.3-fpm-alpine and contains all necessary PHP extensions for pdnsmanager. Image size is around 133MB.
+It's based on php:7.3-fpm-alpine and contains all necessary PHP extensions for pdnsmanager. Image size is around 50MB.
 
 ## Configuration
 
