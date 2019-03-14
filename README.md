@@ -22,7 +22,7 @@ version: '3.3'
 
 services:
     pdnsmanager:
-        build: alexdo/pdnsmanager-fpm:2.0.1
+        image: alexdo/pdnsmanager-fpm:latest
         volumes:
           - ./ConfigUser.php:/etc/pdnsmanager/ConfigUser.php
         ports:
