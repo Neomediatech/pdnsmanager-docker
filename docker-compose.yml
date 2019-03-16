@@ -1,9 +1,14 @@
 version: '3.3'
 
 services:
+#    pdnsmanager_db:
+#        image: mysql:5
+#        environment:
+#          MYSQL_ROOT_PASSWORD: example
+#          MYSQL_DATABASE: pdns
     pdnsmanager_php:
         build: .
-        volumes:
-          - ./ConfigUser.php:/etc/pdnsmanager/ConfigUser.php
+#        volumes:
+#          - ./ConfigUser.php:/etc/pdnsmanager/ConfigUser.php
         ports:
-          - 7777:80
+          - 7778:80

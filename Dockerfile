@@ -1,20 +1,10 @@
-FROM php:7.3-fpm-alpine
-
-RUN apk add --no-cache \
-    nginx \
-    supervisor
+FROM php:7.3-apache
 
 # Install pdnsmnanager php extensions
-RUN docker-php-source extract \
-	&& apk add --no-cache --virtual .build-dependencies \
-		autoconf make g++ libtool \
-	&& pecl install apcu \ 
-	&& docker-php-ext-enable apcu \
-	&& apk del .build-dependencies \
-	&& docker-php-source delete \
-	&& rm -rf /tmp/* /var/cache/apk/*
-
+RUN pecl install apcu 
 RUN docker-php-ext-install -j"$(getconf _NPROCESSORS_ONLN)" pdo_mysql
+
+RUN a2enmod rewrite alias
 
 ENV VERSION 2.0.1
 ENV URL https://dl.pdnsmanager.org/pdnsmanager-${VERSION}.tar.gz
@@ -24,13 +14,14 @@ RUN set -ex ; curl --output pdnsmanager.tar.gz --location ${URL} \
 	&& tar xfz pdnsmanager.tar.gz -C /usr/src \
 	&& rm pdnsmanager.tar.gz \
 	&& mv /usr/src/pdnsmanager-${VERSION} /usr/src/pdnsmanager \
-	&& mkdir -p /var/nginx/client_body_temp /sessions /etc/pdnsmanager
+	&& mkdir -p /sessions /etc/pdnsmanager
 
 RUN rm -rf /usr/src/php.tar.xz*
 
 # Copy configuration
-COPY etc /etc/
-COPY php.ini /usr/local/etc/php/conf.d/php-pdnsmanager.ini
+RUN rm -rf /etc/apache2/sites-enabled/*
+COPY etc/apache2-vhost.conf /etc/apache2/sites-enabled/vhost.conf
+COPY etc/php.ini /etc/php/7.3/apache2/php.ini
 
 # Copy main script
 COPY run.sh /run.sh
@@ -39,4 +30,4 @@ COPY run.sh /run.sh
 EXPOSE 80
 
 ENTRYPOINT [ "/run.sh" ]
-CMD ["supervisord", "-n", "-j", "/supervisord.pid"]
+CMD [ "apache2-foreground" ]
