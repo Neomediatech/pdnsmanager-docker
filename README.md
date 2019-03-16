@@ -1,8 +1,8 @@
-# pdnsmanager PHP-FPM Docker container
+# pdnsmanager Docker container
 
-This container runs php-fpm and nginx via supervisor, serving a [pdnsmanager](https://pdnsmanager.org/quickstart/) installation.
+This container runs a php-enabled apache instance, serving a [pdnsmanager](https://pdnsmanager.org/quickstart/) installation.
 
-It's based on php:7.3-fpm-alpine and contains all necessary PHP extensions for pdnsmanager. Image size is around 50MB.
+It's based on php:7.3-apache and contains all necessary PHP extensions for pdnsmanager. Image size is around 50MB.
 
 ## Configuration
 
@@ -22,7 +22,7 @@ version: '3.3'
 
 services:
     pdnsmanager:
-        image: alexdo/pdnsmanager-fpm:latest
+        image: alexdo/pdnsmanager:latest
         volumes:
           - ./ConfigUser.php:/etc/pdnsmanager/ConfigUser.php
         ports:
