@@ -1,7 +1,7 @@
 FROM php:7.3-apache
 
 # Install pdnsmnanager php extensions
-RUN pecl install apcu 
+RUN pecl install apcu && docker-php-ext-enable apcu
 RUN docker-php-ext-install -j"$(getconf _NPROCESSORS_ONLN)" pdo_mysql
 
 RUN a2enmod rewrite alias
