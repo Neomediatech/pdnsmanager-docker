@@ -7,7 +7,7 @@ RUN docker-php-ext-install -j"$(getconf _NPROCESSORS_ONLN)" pdo_mysql
 RUN a2enmod rewrite alias
 
 ENV VERSION 2.0.1
-ENV URL https://github.com/Neomediatech/pdnsmanager/archive/v${VERSION}.tar.gz
+ENV URL https://github.com/Neomediatech/pdnsmanager-archive/raw/master/pdnsmanager-${VERSION}.tar.gz
 LABEL version=$VERSION
 
 RUN set -ex ; curl --output pdnsmanager.tar.gz --location ${URL} \
