@@ -22,6 +22,7 @@ RUN rm -rf /usr/src/php.tar.xz*
 RUN rm -rf /etc/apache2/sites-enabled/*
 COPY etc/apache2-vhost.conf /etc/apache2/sites-enabled/vhost.conf
 COPY etc/php.ini /etc/php/7.3/apache2/php.ini
+COPY etc/ConfigUser.php /etc/pdnsmanager/ConfigUser.php
 
 # Copy main script
 COPY run.sh /run.sh
