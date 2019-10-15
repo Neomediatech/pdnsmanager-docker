@@ -1,3 +1,11 @@
+# Customized version of pdnsmanager Docker container
+
+Taken from @alexdo work (original README follow this section)
+
+Database configuration is automatically taken from docker compose stack (see [ConfigUser.php file](etc/ConfigUser.php) for details)
+
+-----
+
 # pdnsmanager Docker container
 
 This container runs a php-enabled apache instance, serving a [pdnsmanager](https://pdnsmanager.org/quickstart/) installation.
